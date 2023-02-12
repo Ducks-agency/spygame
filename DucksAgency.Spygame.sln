@@ -3,6 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clientportal", "Clientportal", "{6DECAF53-0AD6-4D85-8783-141760B7A60F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A494FE41-1518-4AAE-82B8-DB703110B781}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DucksAgency.Spygame.Clientportal", "Clientportal\src\DucksAgency.Spygame.Clientportal\DucksAgency.Spygame.Clientportal.csproj", "{B28CAA69-9C17-4299-ACB9-3154F6AEE69F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{C5073EDF-A602-4986-AEB6-E9ACD8671A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DucksAgency.Spygame.Clientportal.Tests", "Clientportal\tests\DucksAgency.Spygame.Clientportal.Tests\DucksAgency.Spygame.Clientportal.Tests.csproj", "{90FF891D-2948-49EE-8EC9-895B742F9F96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +20,21 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A494FE41-1518-4AAE-82B8-DB703110B781} = {6DECAF53-0AD6-4D85-8783-141760B7A60F}
+		{B28CAA69-9C17-4299-ACB9-3154F6AEE69F} = {A494FE41-1518-4AAE-82B8-DB703110B781}
+		{C5073EDF-A602-4986-AEB6-E9ACD8671A62} = {6DECAF53-0AD6-4D85-8783-141760B7A60F}
+		{90FF891D-2948-49EE-8EC9-895B742F9F96} = {C5073EDF-A602-4986-AEB6-E9ACD8671A62}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B28CAA69-9C17-4299-ACB9-3154F6AEE69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B28CAA69-9C17-4299-ACB9-3154F6AEE69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B28CAA69-9C17-4299-ACB9-3154F6AEE69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B28CAA69-9C17-4299-ACB9-3154F6AEE69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90FF891D-2948-49EE-8EC9-895B742F9F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90FF891D-2948-49EE-8EC9-895B742F9F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90FF891D-2948-49EE-8EC9-895B742F9F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90FF891D-2948-49EE-8EC9-895B742F9F96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
