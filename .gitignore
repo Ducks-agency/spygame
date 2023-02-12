@@ -348,3 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Do not include IDEA settings
+.idea/
+
+# do not include VS code settings
+.vs/
