@@ -1,4 +1,7 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+RUN apt-get update
+RUN apt-get install curl -y 
+HEALTHCHECK --interval=5s --timeout=10s --retries=5 CMD curl --fail http://localhost:80/ready
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
