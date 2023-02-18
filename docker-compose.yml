@@ -1,0 +1,38 @@
+volumes:
+  grafana-database:
+  prometheus-database:
+
+services:
+  prometheus:
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/data/prometheus
+    image: prom/prometheus:latest
+    user: root
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-database:/data/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-database:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=foobar
+      - GF_USERS_ALLOW_SIGN_UP=false
+    
+  
+  
+  clientportal:
+    build:
+      dockerfile: "Clientportal/Dockerfile"
+      context: "."
+    ports:
+      - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Compose
