@@ -1,0 +1,20 @@
+volumes:
+  seq-database:
+    
+services:
+  seq:
+    image: datalust/seq
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - "seq-database:/data"
+    environment:
+      - ACCEPT_EULA=Y
+        
+  clientportal:
+    build:
+      dockerfile: "Clientportal/Dockerfile"
+      context: "."
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Compose
