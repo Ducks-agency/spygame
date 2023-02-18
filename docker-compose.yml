@@ -6,7 +6,7 @@ services:
     image: datalust/seq
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - "seq-database:/data"
     environment:
@@ -16,5 +16,7 @@ services:
     build:
       dockerfile: "Clientportal/Dockerfile"
       context: "."
+    ports:
+      - "80:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Compose
