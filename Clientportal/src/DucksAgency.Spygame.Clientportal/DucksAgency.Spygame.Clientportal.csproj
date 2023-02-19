@@ -8,5 +8,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ThrottledHealthCheck" Version="6.0.2" />
+  </ItemGroup>
   
 </Project>
