@@ -1,4 +1,17 @@
 volumes:
+  seq-database:
+    
+services:
+  seq:
+    image: datalust/seq
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - "seq-database:/data"
+    environment:
+      - ACCEPT_EULA=Y
+        
   grafana-database:
   prometheus-database:
 
