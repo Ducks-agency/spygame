@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="prometheus-net.AspNetCore" Version="8.0.0" />
     <PackageReference Include="ThrottledHealthCheck" Version="6.0.2" />
   </ItemGroup>
   

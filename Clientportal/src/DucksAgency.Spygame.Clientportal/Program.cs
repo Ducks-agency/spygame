@@ -1,3 +1,4 @@
+using Prometheus;
 using DucksAgency.Spygame.Clientportal.Healthchecks;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.MapBlazorHub();
+app.MapMetrics();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
