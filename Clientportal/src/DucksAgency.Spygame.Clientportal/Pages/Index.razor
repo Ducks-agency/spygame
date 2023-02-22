@@ -1,9 +1,120 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+@layout EmptyLayout
 
-<h1>Hello, world!</h1>
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime;
 
-Welcome to your new app.
+@using DucksAgency.Spygame.Clientportal.Data
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card mt-3 mb-3">
+                        <div class="card-header">
+                            <h2>Create room</h2>
+                        </div>
+                        <div class="card-body">
+                            <EditForm Model="@userName" OnValidSubmit="@CreateRoom">
+                                <DataAnnotationsValidator />
+                                <div class="form-group row">
+                                    <label class="control-label col-md-12">Player Name</label>
+                                    <div class="col">
+                                        <InputText class="form-control" @bind-Value="userName" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group" align="right">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </EditForm>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card mt-3 mb-3">
+                        <div class="card-header">
+                            <h2>Join room</h2>
+                        </div>
+                        <div class="card-body">
+                            <EditForm Model="@userRoom" OnValidSubmit="@JoinRoom">
+                                <DataAnnotationsValidator />
+                                <div class="form-group row">
+                                    <label class="control-label col-md-12">Player Name</label>
+                                    <div class="col">
+                                        <InputText class="form-control" @bind-Value="userRoom.userName" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-md-12">Room code</label>
+                                    <div class="col">
+                                        <InputText class="form-control" @bind-Value="userRoom.roomAccessCode" />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group" align="right">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </EditForm>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>The cookie is @myCookieValue</p>
+
+
+@code
+{
+    public string userName = String.Empty;
+
+    public string myCookieValue { get; set; } = "";
+
+    public class UserRoom
+    {
+        public string userName { get; set; } = string.Empty;
+        public string roomAccessCode { get; set; } = string.Empty;
+    };
+
+    public UserRoom userRoom = new UserRoom();
+    public User _user = new User();
+
+    public async Task CreateRoom()
+    {
+        await Login();
+    //await WriteCookies();
+    }
+
+    public async Task JoinRoom()
+    {
+        _user.Name = userName;
+        await Login();
+       // await Http.PostAsync("https://localhost:7223/auth/login", JsonContent.Create(_user));
+    }
+
+    protected async Task WriteCookies(string cookieValue)
+    {
+        await JsRuntime.InvokeAsync<string>("WriteCookie.WriteWholeCookie", cookieValue);
+    }
+    //protected async Task ReadCookies()
+    //{
+    //    myCookieValue = await JsRuntime.InvokeVoidAsync<string>("ReadCookie.ReadCookie", ".AspNetCore.Cookies");
+    //}
+
+    private async Task Login()
+    {
+        var response =  await Http.PostAsync("https://localhost:7223/auth/login", JsonContent.Create(_user));
+        var cookieValue = response.Headers.NonValidated.First(pair => pair.Key.Equals("Set-Cookie")).Value.First();
+        await WriteCookies(cookieValue);
+    }
+}
